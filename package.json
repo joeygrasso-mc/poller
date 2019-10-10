@@ -1,0 +1,25 @@
+{
+  "name": "poller",
+  "version": "1.0.0",
+  "description": "a fetch and poll reference implementation and maybe module",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap --node-arg=--inspect-brk",
+    "dev": "nodemon --inspect-brk index.js",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "cool",
+    "wow",
+    "amazing"
+  ],
+  "author": "jhendley25",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3",
+    "tap": "^14.6.9"
+  }
+}
