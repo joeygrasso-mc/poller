@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "tap",
-    "debug:test": "tap --node-arg=--inspect-brk",
+    "debug:test": "node --inspect-brk test/index.js",
     "dev": "nodemon --inspect-brk index.js",
     "start": "node index.js"
   },
