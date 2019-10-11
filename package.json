@@ -4,7 +4,8 @@
   "description": "a fetch and poll reference implementation and maybe module",
   "main": "index.js",
   "scripts": {
-    "test": "tap --node-arg=--inspect-brk",
+    "test": "tap",
+    "debug:test": "tap --node-arg=--inspect-brk",
     "dev": "nodemon --inspect-brk index.js",
     "start": "node index.js"
   },
@@ -19,6 +20,7 @@
     "axios": "^0.19.0"
   },
   "devDependencies": {
+    "express": "^4.17.1",
     "nodemon": "^1.19.3",
     "tap": "^14.6.9"
   }

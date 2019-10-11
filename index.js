@@ -1,11 +1,9 @@
 const axios = require("axios")
 
-const beginJob = async options => {
-  // const {url} = options;
-  debugger
+const beginJob = async (url, payload) => {
   console.log("initial fetch happening");
   try {
-    const response = await axios.post(`http://8aeb9b7c.ngrok.io/v1/scrape`, magpieOptions)
+    const response = await axios.post(url, payload)
     // debugger
 
     const { data: { id, status } } = response;
@@ -16,10 +14,10 @@ const beginJob = async options => {
   }
 }
 
-async function* poll(jobId) {
+async function* poll(url) {
   while (true) {
-    console.log("polling jobID: " + jobId);
-    const response = await axios.get(`http://8aeb9b7c.ngrok.io/v1/scrape/${jobId}`)
+    console.log("polling url: "+url)
+    const response = await axios.get(url)
 
     yield response
   }
@@ -27,10 +25,13 @@ async function* poll(jobId) {
 
 const fetchAndPoll = async options => {
   // start the job and get the id
-  const jobId = await beginJob(options);
+  const {url, pollUrl, payload} = options;
+  const jobId = await beginJob(url, payload);
+
+  const urlToPoll = pollUrl(jobId)
 
   // begin polling
-  for await (const attempt of poll(jobId, options)) {
+  for await (const attempt of poll(urlToPoll)) {
     const { data: { status } } = attempt
 
     if (status == "done") return attempt
