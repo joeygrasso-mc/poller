@@ -30,7 +30,10 @@ const response = await fetchAndPoll(options)
 ## Development
 
 `npm i`
+
 `npm run debug:test`
+
+Make sure you have [NiM](https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj) installed in chrome for best results.
 
 You can also run `npm link` if ya know what you're doing. This will let you install the local dev version in a separate app. Google that for more info.
 
@@ -46,7 +49,7 @@ There's just one test at the moment that spins up a mock server and hits it.
 The library currently assumes the following:
 
 - the initial fetch will be a POST call
-- the initial fetch will return someline that looks like `{id: "somekindaideitherastringorinteger", status:"queued"}`
+- the initial fetch will return something that looks like `{id: "somekindaideitherastringorinteger", status:"queued"}`
 - subsequent polling will be GETs
 - statuses for polling are: `queued`, `done`, and `errored`
 - erroring jobs will not be retried
