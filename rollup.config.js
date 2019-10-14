@@ -1,6 +1,8 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import json from 'rollup-plugin-json';
+import globals from 'rollup-plugin-node-globals';
+import builtins from 'rollup-plugin-node-builtins';
 import pkg from './package.json';
 
 export default [
@@ -15,7 +17,9 @@ export default [
 		plugins: [
 			json(), // because it was erroring
 			resolve(), // so Rollup can find deps
-			commonjs() // so Rollup can convert deps and lib to es
+      commonjs(), // so Rollup can convert deps and lib to es
+      globals(), // so that all node globals and builtins are available (to axios i think)
+      builtins()
 		]
 	},
 
