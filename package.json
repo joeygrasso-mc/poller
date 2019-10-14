@@ -2,13 +2,20 @@
   "name": "poller",
   "version": "1.0.0",
   "description": "a fetch and poll reference implementation and maybe module",
-  "main": "index.js",
+  "main": "dist/fetch-and-poll.cjs.js",
+  "module": "dist/fetch-and-poll.esm.js",
+  "browser": "dist/fetch-and-poll.umd.js",
   "scripts": {
     "test": "tap",
     "debug:test": "node --inspect-brk test/index.js",
     "dev": "nodemon --inspect-brk index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "rollup -c",
+    "debug:build": "rollup -c -w"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "cool",
     "wow",
@@ -22,6 +29,10 @@
   "devDependencies": {
     "express": "^4.17.1",
     "nodemon": "^1.19.3",
+    "rollup": "^1.23.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "tap": "^14.6.9"
   }
 }
