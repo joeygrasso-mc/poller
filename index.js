@@ -1,4 +1,4 @@
-const axios = require("axios")
+const axios = require("axios/dist/axios")
 
 const beginJob = async (url, payload) => {
   console.log("initial fetch happening");
