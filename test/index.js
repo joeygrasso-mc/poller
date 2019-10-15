@@ -61,9 +61,9 @@ t.test('esm build works', async t => {
 t.test('cjs build works', async t => {
   await testFn(fetchAndPollCJS)
 })
-t.test('umd build works', async t => {
-  await testFn(fetchAndPollUMD)
-})
+// t.test('umd build works', async t => {
+//   await testFn(fetchAndPollUMD)
+// })
 
 // t.test('polling exits early when data is returned immediately', async t => {
 //   const url = "http://localhost:3000/begin"

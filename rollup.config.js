@@ -15,7 +15,7 @@ export default [
 			format: 'umd'
 		},
 		plugins: [
-      resolve({preferBuiltins: true}), // so Rollup can find deps, and axios needs browser:true to compile properly
+      resolve({preferBuiltins: true, browser: true}), // so Rollup can find deps, and axios needs browser:true to compile properly
 			json(), // because it was erroring
       commonjs(), // so Rollup can convert deps and lib to es
 		]
