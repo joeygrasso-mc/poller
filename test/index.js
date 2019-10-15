@@ -1,5 +1,8 @@
 const t = require("tap")
 const fetchAndPoll = require("../index")
+const fetchAndPollUMD = require("../dist/fetch-and-poll.umd")
+const fetchAndPollCJS = require("../dist/fetch-and-poll.cjs")
+const fetchAndPollESM = require("../dist/fetch-and-poll.esm")
 const mockServer = require("./mock-server")
 
 const payload = {
@@ -19,20 +22,20 @@ const payload = {
     },
     fullProduct: false,
     product: false
-  }
+  } 
 };
 
-t.beforeEach(async (done, t) => {
-  t.context.server = await mockServer.start()
+mockServer.start()
+t.afterEach((done, t) => {
+  mockServer.reset()
   done()
 })
 
-t.afterEach(async (done, t) => {
+t.teardown(async (done, t) => {
   await mockServer.stop()
-  done()
 })
 
-t.test('polling works', async t => {
+const testFn = async fn => {
   const url = "http://localhost:3000/begin"
   const pollUrl = id => `http://localhost:3000/check/${id}`
 
@@ -42,7 +45,38 @@ t.test('polling works', async t => {
     payload
   }
 
-  const {data: {status}} = await fetchAndPoll(options)
+  const {data: {status}} = await fn(options)
 
   t.same(status, "done")
+}
+
+t.test('polling works', async t => {
+  await testFn(fetchAndPoll)
 })
+
+t.test('esm build works', async t => {
+  await testFn(fetchAndPollESM)
+})
+t.test('cjs build works', async t => {
+  await testFn(fetchAndPollCJS)
+})
+t.test('umd build works', async t => {
+  await testFn(fetchAndPollUMD)
+})
+
+// t.test('polling exits early when data is returned immediately', async t => {
+//   const url = "http://localhost:3000/begin"
+//   const pollUrl = id => {
+//     throw Error("polling did not exit early if this is thrown")
+//   }
+
+//   const options = {
+//     url, 
+//     pollUrl,
+//     payload
+//   }
+
+//   const {data: {status}} = await fetchAndPoll(options)
+
+//   t.same(status, "done")
+// })

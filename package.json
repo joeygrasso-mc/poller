@@ -6,7 +6,7 @@
   "module": "dist/fetch-and-poll.esm.js",
   "browser": "dist/fetch-and-poll.umd.js",
   "scripts": {
-    "test": "tap",
+    "test": "npm run build && tap",
     "debug:test": "node --inspect-brk test/index.js",
     "dev": "nodemon --inspect-brk index.js",
     "start": "node index.js",

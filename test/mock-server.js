@@ -10,6 +10,7 @@ app.get('/check/:id', (req, res) => {
   const { id } = req.params;
   checkCount++
 
+  console.log("hit check");
   if (checkCount > 3) {
     return res.json({ id, status: "done" })
   }
@@ -27,5 +28,8 @@ const start = () => {
 const stop = () => {
   server.close()
 }
+const reset = () => {
+  checkCount = 0
+}
 
-module.exports = {start, stop}
+module.exports = {start, stop, reset}

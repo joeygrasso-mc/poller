@@ -1,22 +1,18 @@
-const axios = require("axios/dist/axios")
+const axios = require("axios")
 
 const beginJob = async (url, payload) => {
-  console.log("initial fetch happening");
-  try {
     const response = await axios.post(url, payload)
-    // debugger
 
     const { data: { id, status } } = response;
 
-    return id
-  } catch (error) {
-    console.log("error occured, abort polling");
-  }
+    if (status == "done") return [id, response.data]
+
+    return [id, false]
 }
 
 async function* poll(url) {
   while (true) {
-    console.log("polling url: "+url)
+    console.log("polling url: " + url)
     const response = await axios.get(url)
 
     yield response
@@ -25,8 +21,10 @@ async function* poll(url) {
 
 const fetchAndPoll = async options => {
   // start the job and get the id
-  const {url, pollUrl, payload} = options;
-  const jobId = await beginJob(url, payload);
+  const { url, pollUrl, payload } = options;
+  const [jobId, data] = await beginJob(url, payload);
+
+  if (data) return data; // data was retrieved from cache, no polling needed
 
   const urlToPoll = pollUrl(jobId)
 
