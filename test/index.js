@@ -42,7 +42,8 @@ const testFn = async fn => {
   const options = {
     url, 
     pollUrl,
-    payload
+    payload,
+    wait: 500
   }
 
   const {data: {status}} = await fn(options)

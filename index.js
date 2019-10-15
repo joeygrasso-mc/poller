@@ -1,5 +1,9 @@
 const axios = require("axios")
 
+const defaultOptions = {
+  wait: 2000
+}
+
 const beginJob = async (url, payload) => {
     const response = await axios.post(url, payload)
 
@@ -21,7 +25,7 @@ async function* poll(url) {
 
 const fetchAndPoll = async options => {
   // start the job and get the id
-  const { url, pollUrl, payload } = options;
+  const { url, pollUrl, payload, wait } = {...defaultOptions, ...options};
   const [jobId, data] = await beginJob(url, payload);
 
   if (data) return data; // data was retrieved from cache, no polling needed
@@ -35,7 +39,7 @@ const fetchAndPoll = async options => {
     if (status == "done") return attempt
     // also need to catch or abort jobs here that errored
 
-    await new Promise(resolve => setTimeout(resolve, 2000)) // wait 2 seconds
+    await new Promise(resolve => setTimeout(resolve, wait)) // wait however long, defaults to 2 seconds
   }
 }
 
