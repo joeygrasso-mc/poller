@@ -15,6 +15,7 @@ const fetchAndPoll = require("@digisci/poller") //or import once we get a build 
 const options = {
   url: "https://a-url-that-supports-polling.com/begin",
   pollUrl: (id) => `https://a-url-that-supports-polling.com/check/${id}`, // or whatever format
+  wait: 5000, // how long to wait between polling (optional, defaults to 2 seconds)
   payload: {
     the: "payload",
     for: "the initial POST"
