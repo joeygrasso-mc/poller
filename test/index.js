@@ -65,19 +65,19 @@ t.test('cjs build works', async t => {
 //   await testFn(fetchAndPollUMD)
 // })
 
-// t.test('polling exits early when data is returned immediately', async t => {
-//   const url = "http://localhost:3000/begin"
-//   const pollUrl = id => {
-//     throw Error("polling did not exit early if this is thrown")
-//   }
+t.test('polling exits early when data is returned immediately', async t => {
+  const url = "http://localhost:3000/cache"
+  const pollUrl = id => {
+    throw Error("polling did not exit early if this is thrown")
+  }
 
-//   const options = {
-//     url, 
-//     pollUrl,
-//     payload
-//   }
+  const options = {
+    url, 
+    pollUrl,
+    payload
+  }
 
-//   const {data: {status}} = await fetchAndPoll(options)
+  const {data: {status}} = await fetchAndPoll(options)
 
-//   t.same(status, "done")
-// })
+  t.same(status, "done")
+})

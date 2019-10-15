@@ -6,6 +6,8 @@ let checkCount = 0
 
 app.post('/begin', (req, res) => res.json({ id: "fake-test-id-ahahahahaha", status: "queued" }))
 
+app.post('/cache', (req, res) => res.json({ id: "fake-test-id-ahahahahaha", status: "done" }))
+
 app.get('/check/:id', (req, res) => {
   const { id } = req.params;
   checkCount++
