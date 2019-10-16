@@ -77,7 +77,7 @@ t.test('polling exits early when data is returned immediately', async t => {
     payload
   }
 
-  const {data: {status}} = await fetchAndPoll(options)
+  const {status} = await fetchAndPoll(options)
 
   t.same(status, "done")
 })
