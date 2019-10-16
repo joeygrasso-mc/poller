@@ -37,5 +37,16 @@
     "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "tap": "^14.6.9"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digitalscientists/poller.git"
+  },
+  "bugs": {
+    "url": "https://github.com/digitalscientists/poller/issues"
+  },
+  "homepage": "https://github.com/digitalscientists/poller#readme"
 }
