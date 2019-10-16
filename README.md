@@ -4,13 +4,13 @@ This is a simple little library that implements a fetch-and-poll procedure.
 
 ## Getting Started
 
-`npm install @digisci/poller` once we get this thing up on npm.
+`npm install @digitalscientists/poller` once we get this thing up on npm.
 
 ## Usage
 
 ```js
 
-const fetchAndPoll = require("@digisci/poller") //or import once we get a build in place
+const fetchAndPoll = require("@digitalscientists/poller") //or import once we get a build in place
 
 const options = {
   url: "https://a-url-that-supports-polling.com/begin",
