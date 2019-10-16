@@ -46,7 +46,7 @@ const testFn = async fn => {
     wait: 500
   }
 
-  const {data: {status}} = await fn(options)
+  const {status} = await fn(options)
 
   t.same(status, "done")
 }
@@ -80,4 +80,24 @@ t.test('polling exits early when data is returned immediately', async t => {
   const {data: {status}} = await fetchAndPoll(options)
 
   t.same(status, "done")
+})
+
+t.test('polling times out and raises an error', async t => {
+  const url = "http://localhost:3000/begin"
+  const pollUrl = id => `http://localhost:3000/check/${id}`
+
+  const options = {
+    url, 
+    pollUrl,
+    payload,
+    wait: 500,
+    timeout: 500
+  }
+
+  try {
+    const response = await fetchAndPoll(options)
+  } catch (error) {
+    t.same(error.message, "Timeout of 500 ms exceeded! Aborting polling.")
+  }
+
 })

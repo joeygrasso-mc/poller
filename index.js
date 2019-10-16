@@ -1,7 +1,8 @@
 const axios = require("axios")
 
 const defaultOptions = {
-  wait: 2000
+  wait: 2000,
+  timeout: 120000,
 }
 
 const beginJob = async (url, payload) => {
@@ -23,8 +24,10 @@ async function* poll(url) {
 }
 
 const fetchAndPoll = async options => {
+  // get a starting timestamp
+  const jobStart = Date.now()
   // start the job and get the id
-  const { url, pollUrl, payload, wait } = {...defaultOptions, ...options};
+  const { url, pollUrl, payload, wait, timeout } = {...defaultOptions, ...options};
   const [jobId, data] = await beginJob(url, payload);
 
   if (data) return data; // data was retrieved from cache, no polling needed
@@ -37,6 +40,9 @@ const fetchAndPoll = async options => {
 
     if (status == "done") return attempt.data
     // also need to catch or abort jobs here that errored
+
+    // make sure the job times out
+    if (Date.now() - jobStart > timeout) throw new Error(`Timeout of ${timeout} ms exceeded! Aborting polling.`)
 
     await new Promise(resolve => setTimeout(resolve, wait)) // wait however long, defaults to 2 seconds
   }
