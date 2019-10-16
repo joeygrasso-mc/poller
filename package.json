@@ -1,6 +1,6 @@
 {
   "name": "@digitalscientists/poller",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "a fetch and poll reference implementation and maybe module",
   "main": "dist/fetch-and-poll.cjs.js",
   "module": "dist/fetch-and-poll.esm.js",
