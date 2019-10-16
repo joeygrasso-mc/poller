@@ -9,7 +9,7 @@ const beginJob = async (url, payload) => {
     const response = await axios.post(url, payload)
     const { data: { id, status } } = response;
     
-    if (status == "done") return [id, response]
+    if (status == "done") return [id, response.data]
 
     return [id, false]
 }
