@@ -1,5 +1,6 @@
 {
-  "name": "poller",
+  "private": true,
+  "name": "@digitalscientists/poller",
   "version": "1.0.0",
   "description": "a fetch and poll reference implementation and maybe module",
   "main": "dist/fetch-and-poll.cjs.js",
