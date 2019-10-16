@@ -7,7 +7,7 @@ const defaultOptions = {
 const beginJob = async (url, payload) => {
     const response = await axios.post(url, payload)
     const { data: { id, status } } = response;
-
+    
     if (status == "done") return [id, response]
 
     return [id, false]
@@ -35,7 +35,7 @@ const fetchAndPoll = async options => {
   for await (const attempt of poll(urlToPoll)) {
     const { data: { status } } = attempt
 
-    if (status == "done") return attempt
+    if (status == "done") return attempt.data
     // also need to catch or abort jobs here that errored
 
     await new Promise(resolve => setTimeout(resolve, wait)) // wait however long, defaults to 2 seconds
