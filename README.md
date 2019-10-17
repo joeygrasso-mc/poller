@@ -4,18 +4,19 @@ This is a simple little library that implements a fetch-and-poll procedure.
 
 ## Getting Started
 
-`npm install @digitalscientists/poller` once we get this thing up on npm.
+`npm install @digitalscientists/poller` 
 
 ## Usage
 
 ```js
 
-const fetchAndPoll = require("@digitalscientists/poller") //or import once we get a build in place
+const fetchAndPoll = require("@digitalscientists/poller") 
 
 const options = {
   url: "https://a-url-that-supports-polling.com/begin",
   pollUrl: (id) => `https://a-url-that-supports-polling.com/check/${id}`, // or whatever format
-  wait: 5000, // how long to wait between polling (optional, defaults to 2 seconds)
+  wait: 2000, // how long to wait between polling (optional, defaults to 2 seconds)
+  timeout: 120000, // how long to wait between polling (optional, defaults to 120 seconds)
   payload: {
     the: "payload",
     for: "the initial POST"
@@ -26,6 +27,16 @@ const response = await fetchAndPoll(options)
 
 
 ```
+
+## Deployment
+
+*Make sure you run the tests before deploying*
+
+`npm build`
+
+`npm version patch # or major|minor depending on changes`
+
+`npm publish`
 
 
 ## Development
@@ -42,7 +53,7 @@ You can also run `npm link` if ya know what you're doing. This will let you inst
 
 `npm test` 
 
-There's just one test at the moment that spins up a mock server and hits it.
+This will run the rollup build process and test the main `index.js` file as well as the built lib files agaist a mock server. TODO: still need to test the UMD version, but need a browser env or something for that.
 
 
 ### current assumptions and limitations
